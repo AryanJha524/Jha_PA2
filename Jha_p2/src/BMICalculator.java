@@ -43,16 +43,22 @@ public class BMICalculator {
 		return 0;
 	}
 	
-	public double calculateBmi() 
+	public void calculateBmi() 
 	{
-		return 0;
+		//actually calculate
+		double bmi = 0;
+		
+		this.bmi = bmi;
+		
 	}
 	
-	public String calculateBmiCatergory()
+	public void calculateBmiCatergory()
 	{
 		//Take in the result from calculateBmi, do an if else
-		
-		return "";
+		if (this.bmi == 0)
+		{
+			this.bmiCategory = "some category";
+		}
 	}
 	
 	public void displayBmi()
@@ -80,6 +86,15 @@ public class BMICalculator {
 		return this.height;
 	}
 	
+	public double getBmi()
+	{
+		return this.bmi;
+	}
+	
+	public String getBmiCategory()
+	{
+		return this.bmiCategory;
+	}
 	
 	
 	
