@@ -10,7 +10,6 @@ public class Application {
 		System.out.print("Enter a value: ");
 		input = scanner.nextLine();
 
-		
 		System.out.print("Would you like to Encrypt or Decrypt the value?(E/D): ");
 		choice = scanner.next().charAt(0);
 		
