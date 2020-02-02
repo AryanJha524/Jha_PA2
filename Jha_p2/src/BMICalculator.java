@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class BMICalculator {
 	private static Scanner scanner = new Scanner(System.in);
 	private double weight;
@@ -8,12 +9,13 @@ public class BMICalculator {
 	private String bmiCategory;
 	private String unitType;
 	
-	
-	public void main(String[] args)
-	{
-		readUserData();
+	public static void main(String[] args) {
+		BMICalculator app = new BMICalculator();
+		app.readUserData();
+		app.calculateBmi();
+		app.displayBmi();
+		
 	}
-	
 	public void readUserData()
 	{
 		readUnitType();
@@ -52,92 +54,110 @@ public class BMICalculator {
 			readImperialData();
 		}
 		
+		
 	}
 	
 	private void readMetricData()
 	{
-		System.out.println("Enter weight (in metric units: ");
-		this.weight = scanner.nextDouble();
-		if(this.weight < 0)
+		double tweight = 0;
+		double theight = 0;
+		
+		System.out.println("Enter weight in pounds: ");
+		tweight = scanner.nextDouble();
+		if(tweight < 0)
 		{
 			System.out.println("Invalid value for weight.");
 			System.exit(0);
 		}
+		this.setWeight(tweight);
 		
-		System.out.println("Enter height (in metric units: ");
-		this.height = scanner.nextDouble();
-		if(this.height < 0)
+		
+		System.out.println("Enter height in inches: ");
+		theight = scanner.nextDouble();
+		if(theight < 0)
 		{
 			System.out.println("Invalid value for height.");
 			System.exit(0);
 		}
+		this.setHeight(theight);
 		
 		//if all information is valid, calculate BMI with function 
-		calculateBmi(this.weight, this.height);
-
 		
 	}
 	
 	private void readImperialData()
 	{
-		System.out.println("Enter weight (in imperial units: ");
-		this.weight = scanner.nextDouble();
-		if(this.weight < 0)
+		double tweight = 0;
+		double theight = 0;
+		
+		System.out.println("Enter weight kilograms: ");
+		tweight = scanner.nextDouble();
+		if(tweight < 0)
 		{
 			System.out.println("Invalid value for weight.");
 			System.exit(0);
 		}
+		this.setWeight(tweight);
 		
-		System.out.println("Enter height (in imperial units: ");
-		this.height = scanner.nextDouble();
-		if(this.height < 0)
+		
+		System.out.println("Enter height in meters: ");
+		theight = scanner.nextDouble();
+		if(theight < 0)
 		{
 			System.out.println("Invalid value for height.");
 			System.exit(0);
 		}
+		this.setHeight(theight);
 		
 		//if all information is valid, calculate BMI with function 
-		calculateBmi(this.weight, this.height);
+		
 		
 	}
 	
-	public void calculateBmi(double weight, double height) 
-	{
-		//calculating the 
-		if(this.unitType.equals("m"))
-		{
-			
-		}
+	public void calculateBmi() 
+	{ 
 		double bmi = 0;
 		
-		this.bmi = bmi;
+		if(this.unitType.equals("m"))
+		{
+			 bmi = (weight * 703)/(Math.pow(height, 2));
+		}
 		
+		else if (this.unitType.equals("i"))
+		{
+			bmi = weight/(Math.pow(height, 2));
+		}
+		
+		this.bmi = bmi;
+		this.calculateBmiCategory();
 	}
 	
-	public void calculateBmiCatergory()
+	public void calculateBmiCategory()
 	{
+		double temp = this.getBmi();
 		//Take in the result from calculateBmi, do an if else
-		if (this.bmi <= 18.5)
+		if (temp <= 18.5)
 		{
-			this.bmiCategory = "Underweight";
+			this.setCategory("Underweight");
 		}
-		else if (this.bmi > 18.5 || this.bmi < 25)
+		else if (temp > 18.5 || temp < 25)
 		{
-			this.bmiCategory = "Normal weight";
+			this.setCategory("Normal Weight");
 		}
-		else if (this.bmi>= 25 || this.bmi <30)
+		else if (temp>= 25 || temp <30)
 		{
-			this.bmiCategory = "Over weight";
+			this.setCategory("Over weight");
 		}
-		else if (this.bmi >= 30)
+		else if (temp >= 30)
 		{
-			this .bmiCategory = "Obese";
+			this.setCategory("Obese");
 		}
 	}
 	
 	public void displayBmi()
 	{
-		//take input from bmi and category and display. 
+		System.out.printf("Your BMI is: %.02f, which falls under %s\n",this.getBmi(), this.getBmiCategory());
+
 	}
 	
 	public void setWeight(double weight)
@@ -148,6 +168,11 @@ public class BMICalculator {
 	public void setHeight(double height)
 	{
 		this.height = height;
+	}
+	
+	public void setCategory(String category)
+	{
+		this.bmiCategory = category;
 	}
 	
 	public double getWeight()
