@@ -15,6 +15,7 @@ public class BMICalculator {
 		app.calculateBmi();
 		app.displayBmi();
 		
+		
 	}
 	public void readUserData()
 	{
@@ -25,6 +26,7 @@ public class BMICalculator {
 	private void readUnitType()
 	{
 		String input = "";
+		do {
 		System.out.println("Would you like to measure in Metric or Imperial Data?(M/I): ");
 		input = scanner.nextLine();
 		input = input.toLowerCase();
@@ -37,6 +39,7 @@ public class BMICalculator {
 		{
 			this.unitType = "i"; 
 		}
+	}while( !(input.equals("m")) && !(input.equals("i")));
 		
 		
 	}
